@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://mysterious-wave-64325.herokuapp.com/',
+            target: 'https://secret-fortress-65333.herokuapp.com',
             changeOrigin: true,
         })
     );
