@@ -276,6 +276,11 @@ app.post('/api/addlabel',function (req,res){
     res.redirect('/app/filters-labels');
 })
 
-app.listen(3030,function (){
+let port = process.env.PORT;
+if(port==null||port==""){
+    port=3030;
+}
+
+app.listen(port,function (){
     console.log("Server running on port 3030!");
 })

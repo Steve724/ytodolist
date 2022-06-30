@@ -9,6 +9,9 @@
   },
   "author": "Chris Yan",
   "license": "ISC",
+  "engines": {
+    "node":"16.14.0"
+  },
   "dependencies": {
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
