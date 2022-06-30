@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'https://aqueous-dawn-43027.herokuapp.com',
+            target: 'http://localhost:3030',
             changeOrigin: true,
         })
     );
