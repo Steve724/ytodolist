@@ -281,6 +281,6 @@ if(port==null||port==""){
     port=3030;
 }
 
-app.listen(3030,function (){
+app.listen(port,function (){
     console.log("Server running on port 3030!");
 })

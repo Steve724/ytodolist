@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://localhost:3030',
+            target: 'https://mysterious-headland-08309.herokuapp.com',
             changeOrigin: true,
         })
     );
