@@ -5,6 +5,7 @@ import Footer from "./Footer";
 function Features(){
     return(
         <div>
+            <Navigation/>
             <p>Hello world</p>
             <Footer/>
         </div>

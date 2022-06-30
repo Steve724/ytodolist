@@ -1,0 +1,12 @@
+.appNavigation{
+    position:fixed;
+    top:0;
+    overflow: hidden;
+    z-index: 1;
+    width: 100%;
+}
+
+/*.left-bar{*/
+/*    background-color: #F9F9F9;*/
+/*    margin-bottom: 0;*/
+/*}*/

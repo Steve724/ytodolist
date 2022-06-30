@@ -5,6 +5,7 @@ export default class Home extends React.Component{
     render() {
         return(
             <div>
+                <Navigation/>
                 <div className="home-section1">
                     <h1>Organize your<br/>
                         work and life, finally.
