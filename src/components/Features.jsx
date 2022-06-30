@@ -6,7 +6,7 @@ function Features(){
     return(
         <div>
             <Navigation/>
-            <p>Hello world</p>
+            <p>Hello world!</p>
             <Footer/>
         </div>
 

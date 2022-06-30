@@ -22,7 +22,7 @@ export default class Home extends React.Component{
                         </div>
                         <div className="col-md-6 home-paragraph">
                             <h2>Add your tasks. Organize your life. Achieve more every day.</h2>
-                            <p>Add tasks like “Read work emails every day at 10am” to fill your to-do list in seconds using
+                            <p>Add tasks like “Read work emails every day at 10am” to fill your Yto-do list in seconds using
                                 Todoist’s powerful natural language recognition and recurring dates.</p>
                         </div>
                     </div>

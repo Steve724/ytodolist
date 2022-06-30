@@ -5,7 +5,7 @@ function Templates(){
     return(
         <div>
             <Navigation/>
-            <p>hello templates</p>
+            <p>hello templates!</p>
             <Footer/>
         </div>
 
