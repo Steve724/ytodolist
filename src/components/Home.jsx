@@ -10,7 +10,7 @@ export default class Home extends React.Component{
                         work and life, finally.
                     </h1>
                     <p>
-                        Become focused, organized, and calm with Todoist. The world’s #1 task manager and to-do list app.
+                        Become focused, organized, and calm with YTodolist. The world’s #1 task manager and to-do list app.
                     </p>
                     <button className="btn btn-danger my-2 my-sm-0" type="submit">Start for free</button>
                 </div>
