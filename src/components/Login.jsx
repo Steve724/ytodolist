@@ -23,7 +23,7 @@ function Login(){
         <div>
             <Navigation/>
             <main className="form-signin w-100 m-auto">
-                <form action="https://fast-sands-52706.herokuapp.com/api/login" method="post">
+                <form action="https://fast-sands-52706.herokuapp.com//api/login" method="post">
                     {/*<img className="mb-4" src="images/logo.png" alt="" width="80" height="80"/>*/}
                     <h1 className="h3 mb-3 fw-normal">Login to Ytodolist!</h1>
                     <input type="email" className="form-control middle" id="username" placeholder="username"
