@@ -3,11 +3,12 @@ import {getWholeDate,getWholeWeekDay} from "../../utils/getDate";
 import AddTask from "./AddTask";
 
 import {addP1, initP1} from "../../features/priority/priority1Slice";
+import {useNavigate} from "react-router-dom";
 
 export default function EachDayAddTask({num}){
     const [todayTask,setTodayTask] = useState([]);
     const [username,setUsername] = useState("");
-
+    const navigate = useNavigate();
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('items'));
         setUsername(items.username);
@@ -44,6 +45,20 @@ export default function EachDayAddTask({num}){
             })
         )
     }
+
+    function handleDelete(id){
+        console.log(1);
+        console.log(id);
+        fetch('/api/deleteTask',{
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body:"username="+username+"&id="+id
+        }).then((res)=>{
+            console.log('delete succeed');
+            navigate(2);
+        })
+    }
+
     return (
         <div style={{marginBottom:"50px"}}>
             <p>{getWholeDate(num)} · {getWholeWeekDay(num)}</p>
@@ -53,13 +68,8 @@ export default function EachDayAddTask({num}){
 
                     return (
                         <div>
-                            <p><span><form style={{display:"inline-block"}} action="/api/deletetask" method="post">
-                                <button type="submit" style={{borderWidth:'0px',backgroundColor:'white'}}><i className="fa-regular fa-square"></i></button>
-                                <input type="hidden" name="username" value={username}/>
-                                <input type="hidden" name="title" value={item.title}/>
-                                <input type="hidden" name="time" value={item.time}/>
-                                <input type="hidden" name="priority" value={item.priority}/>
-                            </form>  {item.title}</span></p>
+                            <p><button type="button" onClick={()=>{handleDelete(item._id.toString())}} style={{borderWidth:'0px',backgroundColor:'white'}}><i className="fa-regular fa-square"></i></button>
+                                {item.title}</p>
                             <p style={{marginLeft:"15px",color:"gray"}}>{item.content}</p>
                         </div>
                     )

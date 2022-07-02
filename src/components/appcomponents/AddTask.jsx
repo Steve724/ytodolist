@@ -11,12 +11,14 @@ import {addP2} from "../../features/priority/priority2Slice";
 import {addP3} from "../../features/priority/priority3Slice";
 import {addP4} from "../../features/priority/priority4Slice";
 import {addP5} from "../../features/priority/priority5Slice";
+import {useNavigate} from "react-router-dom";
 
 function AddTask(props){
     const [isExpanded,setExpanded] = useState(false);
     const dispatch = useDispatch();
     const priority = useSelector(selectPriorityForAddTask);
     const inbox = props.inbox;
+    const navigate = useNavigate();
 
     const [task,setTask] = useState({
         title:"",
@@ -95,12 +97,30 @@ function AddTask(props){
         setUsername(items.username);
 
     }, []);
-    const url = "/api/addtask/"+username;
+    const url = "/api/addTask/"+username;
     const priorityValue = priority+"";
     const timeValue = getWholeDate(props.num)+"";
+
+    function handleSubmit(e){
+        e.preventDefault();
+        let submitTask = "username="+username+"&title="+task.title+"&content="+task.content+"&priority="+priorityValue+"&time="+timeValue;
+        fetch(url,{
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body: submitTask
+        }).then((res)=>{
+            console.log(res);
+            setExpanded(false);
+            // navigate('/app/inbox',{replace:false});
+            navigate(2);
+        })
+
+    }
+
+
     return(
         <div>
-            <form action={url} method="post">
+            <form onSubmit={handleSubmit}>
                 {
                     isExpanded ? (
                         <div style={{borderWidth:'2px',borderColor:'#839AA8',borderStyle:'solid',borderRadius:'5px'}}>

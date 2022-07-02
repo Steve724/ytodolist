@@ -1,0 +1,147 @@
+#todolist{
+    font-family: 'Lato', sans-serif;
+    color: red;
+}
+
+li a{
+    margin-left: 25px;
+}
+
+.form-inline a{
+    margin-right: 20px;
+}
+
+form a{
+    color: gray;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #FFE6E6;
+    color: black;
+}
+
+footer i{
+    margin-left: 10px;
+}
+
+.img-left{
+    width: 375px;
+    height:372px;
+}
+
+.img-right{
+    width: 375px;
+    height:372px;
+}
+
+.foot-paragraph{
+    margin-left: 50%;
+    text-align: left;
+    position: absolute;
+    margin-right: 200px;
+    margin-top: 180px;
+
+}
+
+.foot-img{
+    width: 404px;
+    height: 468px;
+    margin-left: 40px;
+}
+
+.home-foot{
+    background-color: #FFE6E6;
+    margin-top: 150px;
+}
+
+.home-section1{
+    padding-top: 10%;
+    text-align: center;
+
+}
+
+.img-paragraph{
+    padding-top: 10%;
+    text-align: left;
+}
+
+.home-paragraph{
+    padding-top: 50px;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+.top{
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.middle {
+    margin-bottom: 0px;
+    /*border-bottom-right-radius: 0;*/
+    /*border-bottom-left-radius: 0;*/
+}
+
+.bottom {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.app-search{
+    margin-left: 15px;
+}
+
+.menu-home{
+    margin-left: 20px;
+    color: red;
+}
+
+.app-nav{
+    margin-left: 800px;
+}
+
+#date{
+    float:left;
+}
+
+#increaseDate{
+
+    float:left;
+}
+
+:root{
+    --bg:#242526;
+    --bg-accent:#484a4d;
+    --text-color:#dadce1;
+    --nav-size:60px;
+    --border:1px solid #474a4d;
+    --spend:500ms;
+}
+
+#dropdown{
+    position: absolute;
+    top:58px;
+    width: 300px;
+    transform: translateX(-45%);
+    background-color: var(--bg);
+    border: var(--border);
+    padding: 1rem;
+    overflow: hidden;
+}
+
+#menu-item{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+}

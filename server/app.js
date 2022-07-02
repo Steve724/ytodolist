@@ -6,9 +6,10 @@ const app = express();
 const passport = require('passport');
 const session = require('express-session');
 const findOrCreate = require('mongoose-findorcreate')
-
+const path = require('path');
 app.use(bodyParser.urlencoded({extends:true}));
 
+app.use(express.static(path.join(__dirname+"/public")))
 //app.set('view engine','jsx');
 
 app.use(session({
@@ -20,8 +21,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// mongoose.connect('mongodb://localhost:27017/todolistDB');
-mongoose.connect('mongodb+srv://admin-chris:Yan990724!@cluster0.meh9dpn.mongodb.net/todolistDB');
+mongoose.connect('mongodb://localhost:27017/todolistDB');
+// mongoose.connect('mongodb+srv://admin-chris:Yan990724!@cluster0.meh9dpn.mongodb.net/todolistDB');
 
 const taskSchema = new mongoose.Schema({
     title:String,
@@ -57,9 +58,9 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/api/login",function (req,res){
-    res.redirect("/login");
-})
+// app.get("/api/login",function (req,res){
+//     res.redirect("/login");
+// })
 
 app.get("/api/app",function (req,res){
     if(req.isAuthenticated()){
@@ -85,13 +86,16 @@ app.post("/api/login",function (req,res){
         username:req.body.username,
         password:req.body.password
     });
+    console.log(req.body);
     req.login(user,function (err){
         if(err){
-            console.log(err);
-            res.redirect("/login");
+            console.log('fail');
+            // res.redirect("/login");
         }else{
             passport.authenticate("local", {failureRedirect: "/login"})(req,res,function (){
-                res.redirect("/app/today");
+                // res.redirect("/app/today");
+                res.send('200');
+                console.log('Log in successfully');
             })
         }
     })
@@ -109,18 +113,19 @@ app.post("/api/signup",function (req,res){
     User.register({username:req.body.username},req.body.password,function (err,user){
         if(err){
             console.log(err);
-            res.redirect("/api/signup");
+            res.send('404');
         }else{
             passport.authenticate("local")(req,res,function (){
-                res.redirect("/api/app");
+                res.send('200');
             })
         }
     })
 
 })
 
-app.post('/api/addtask/:username',function (req,res){
+app.post('/api/addTask/:username',function (req,res){
     const username = req.params.username;
+    console.log(req.body);
     let preTasks = [];
     User.find({username:username},function (err,foundList){
         if(!err){
@@ -137,6 +142,7 @@ app.post('/api/addtask/:username',function (req,res){
                     if(err){
                         console.log(err);
                     }else{
+                        res.send('200');
                         console.log("Successfully add task");
                     }
                 });
@@ -145,26 +151,30 @@ app.post('/api/addtask/:username',function (req,res){
             console.log(err);
         }
     })
-    res.redirect("/app/today");
+
 })
 
-app.post('/api/deletetask',function (req,res){
+app.post('/api/deleteTask',function (req,res){
     const username = req.body.username;
-    const title = req.body.title;
-    const time = req.body.time;
-    const priority = req.body.priority;
+    const id = req.body.id;
+    console.log(id);
+    console.log(username);
+    // const title = req.body.title;
+    // const time = req.body.time;
+    // const priority = req.body.priority;
     let preTasks = [];
     User.find({username:username},function (err,foundList){
         if(!err){
             if(foundList[0]){
                 preTasks = foundList[0].tasks;
                 let curTasks = preTasks.filter(task =>{
-                    return !(task.title===title&&task.time===time&&task.priority)
+                    return !(task.id===id)
                 })
                 User.updateOne({username:username},{tasks:curTasks},function (err){
                     if(err){
                         console.log(err);
                     }else{
+                        res.send('200');
                         console.log("Successfully delete task");
                     }
                 });
@@ -173,7 +183,7 @@ app.post('/api/deletetask',function (req,res){
             console.log(err);
         }
     })
-    res.redirect("/app/inbox");
+
 })
 
 app.post('/api/addfilter',function (req,res){
@@ -205,6 +215,7 @@ app.post('/api/addfilter',function (req,res){
 app.post('/api/deletefilter',function (req,res){
     const username = req.body.username;
     const name = req.body.name;
+
     User.find({username:username},function (err,foundList){
         if(!err){
             if(foundList[0]){
