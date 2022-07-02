@@ -5,7 +5,7 @@ module.exports = function(app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://localhost:3030',
+            target: 'https://peaceful-oasis-74660.herokuapp.com',
             changeOrigin: true,
         })
     );
