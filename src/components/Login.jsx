@@ -30,7 +30,7 @@ function Login(){
     function handleSubmit(e){
         e.preventDefault();
         let user = "username="+userInputName+"&password="+password;
-        fetch('https://safe-escarpment-92760.herokuapp.com/api/login',{
+        fetch('/api/login',{
             method:"POST",
             headers:{"Content-Type":"application/x-www-form-urlencoded"},
             body: user
