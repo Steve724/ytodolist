@@ -7,6 +7,10 @@ const passport = require('passport');
 const session = require('express-session');
 const findOrCreate = require('mongoose-findorcreate')
 const path = require('path');
+const cors = require('cors');
+
+app.use(cors());
+
 app.use(bodyParser.urlencoded({extends:true}));
 
 app.use(express.static(path.join(__dirname+"/public")))
@@ -21,8 +25,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// mongoose.connect('mongodb://localhost:27017/todolistDB');
-mongoose.connect('mongodb+srv://admin-chris:Yan990724!@cluster0.meh9dpn.mongodb.net/todolistDB');
+mongoose.connect('mongodb://localhost:27017/todolistDB');
+// mongoose.connect('mongodb+srv://admin-chris:Yan990724!@cluster0.meh9dpn.mongodb.net/todolistDB');
 
 const taskSchema = new mongoose.Schema({
     title:String,
@@ -61,6 +65,8 @@ passport.deserializeUser(User.deserializeUser());
 // app.get("/api/login",function (req,res){
 //     res.redirect("/login");
 // })
+
+
 
 app.get("/api/app",function (req,res){
     if(req.isAuthenticated()){

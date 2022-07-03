@@ -45,5 +45,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://calm-ridge-08929.herokuapp.com"
+  "proxy": "http://localhost:3030"
+
 }
