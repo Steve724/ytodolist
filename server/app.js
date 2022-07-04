@@ -66,7 +66,33 @@ passport.deserializeUser(User.deserializeUser());
 //     res.redirect("/login");
 // })
 
+// app.get('*',function (req,res){
+//     res.sendFile(path.join(__dirname, '../public/index.html'));
+// })
 
+app.get('/app/today',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
+app.get('/app/inbox',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
+app.get('/app/filters-labels',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
+app.get('/app/upcoming',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
+app.get('/login',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
+app.get('/signup',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
 
 app.get("/api/app",function (req,res){
     if(req.isAuthenticated()){
@@ -131,6 +157,7 @@ app.post("/api/signup",function (req,res){
 
 app.post('/api/addTask/:username',function (req,res){
     const username = req.params.username;
+    const page = req.body.page;
     console.log(req.body);
     let preTasks = [];
     User.find({username:username},function (err,foundList){
@@ -157,7 +184,6 @@ app.post('/api/addTask/:username',function (req,res){
             console.log(err);
         }
     })
-
 })
 
 app.post('/api/deleteTask',function (req,res){
@@ -192,7 +218,7 @@ app.post('/api/deleteTask',function (req,res){
 
 })
 
-app.post('/api/addfilter',function (req,res){
+app.post('/api/addFilter',function (req,res){
     const username = req.body.username;
     const name = req.body.name;
     const query = req.body.query;
@@ -215,19 +241,19 @@ app.post('/api/addfilter',function (req,res){
             }
         }
     })
-    res.redirect('/app/filters-labels');
+
 })
 
-app.post('/api/deletefilter',function (req,res){
+app.post('/api/deleteFilter',function (req,res){
     const username = req.body.username;
-    const name = req.body.name;
+    const id = req.body.id;
 
     User.find({username:username},function (err,foundList){
         if(!err){
             if(foundList[0]){
                 let preFilters = foundList[0].filters;
                 let curFilters = preFilters.filter(filter =>{
-                    return !(filter.name===name);
+                    return !(filter.id===id);
                 })
                 User.updateOne({username:username},{filters:curFilters},function (err){
                     if(err){
@@ -241,23 +267,24 @@ app.post('/api/deletefilter',function (req,res){
             console.log(err);
         }
     })
-    res.redirect('/app/filters-labels');
+
 })
 
-app.post('/api/deletelabel',function (req,res){
+app.post('/api/deleteLabel',function (req,res){
     const username = req.body.username;
-    const name = req.body.name;
+    const id = req.body.id;
     User.find({username:username},function (err,foundList){
         if(!err){
             if(foundList[0]){
                 let preLabels = foundList[0].labels;
                 let curLabels = preLabels.filter(label =>{
-                    return !(label.name===name);
+                    return !(label.id===id);
                 })
                 User.updateOne({username:username},{labels:curLabels},function (err){
                     if(err){
                         console.log(err);
                     }else{
+                        res.send('200');
                         console.log("Successfully delete label");
                     }
                 });
@@ -266,10 +293,10 @@ app.post('/api/deletelabel',function (req,res){
             console.log(err);
         }
     })
-    res.redirect('/app/filters-labels');
+
 })
 
-app.post('/api/addlabel',function (req,res){
+app.post('/api/addLabel',function (req,res){
     const username = req.body.username;
     const name = req.body.name;
     User.find({username:username},function (err,foundList){
@@ -284,13 +311,14 @@ app.post('/api/addlabel',function (req,res){
                     if(err){
                         console.log(err);
                     }else{
+                        res.send('successfully add label.');
                         console.log("Successfully add label.");
                     }
                 });
             }
         }
     })
-    res.redirect('/app/filters-labels');
+
 })
 
 let port = process.env.PORT;

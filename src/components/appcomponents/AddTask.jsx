@@ -103,7 +103,7 @@ function AddTask(props){
 
     function handleSubmit(e){
         e.preventDefault();
-        let submitTask = "username="+username+"&title="+task.title+"&content="+task.content+"&priority="+priorityValue+"&time="+timeValue;
+        let submitTask = "username="+username+"&title="+task.title+"&content="+task.content+"&priority="+priorityValue+"&time="+timeValue+"&page="+props.page;
         fetch(url,{
             method:"POST",
             headers:{"Content-Type":"application/x-www-form-urlencoded"},

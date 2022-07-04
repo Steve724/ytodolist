@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from "react";
 import ReactDOM from "react-dom/client";
+import {useNavigate} from "react-router-dom";
 
 const MODAL_STYLES = {
     position:'fixed',
@@ -27,7 +28,7 @@ export default function ModalFilter({open,children,onClose,onAdd}){
         name:"",
         query:""
     })
-
+    const navigate = useNavigate();
     const [username,setUsername] = useState("");
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('items'));
@@ -46,6 +47,22 @@ export default function ModalFilter({open,children,onClose,onAdd}){
                 [name]:value
             }
         })
+    }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        onAdd();
+        let submitFilter = "username="+username+"&name="+filter.name+"&query="+filter.query
+        fetch('/api/addFilter',{
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body: submitFilter
+        }).then((res)=>{
+            console.log(res);
+            // navigate('/app/inbox',{replace:false});
+            navigate(2);
+        })
+
     }
 
     function handleAddFilter(){
@@ -70,7 +87,7 @@ export default function ModalFilter({open,children,onClose,onAdd}){
                 </div>
                 <button onClick={onClose} style={{display:"inline-block"}}>Cancel</button>
                 {/*<button onClick={handleAddFilter}>Add</button>*/}
-                <form style={{display:"inline-block"}} action="/api/addfilter" method="post" >
+                <form style={{display:"inline-block"}} onSubmit={handleSubmit} >
                     <input type="hidden" name="username" value={username}/>
                     <input type="hidden" name="name" value={filter.name}/>
                     <input type="hidden" name="query" value={filter.query}/>

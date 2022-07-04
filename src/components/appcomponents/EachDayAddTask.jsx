@@ -75,7 +75,7 @@ export default function EachDayAddTask({num}){
                     )
                 })
             }
-            <AddTask onAdd={addTodayTask} num={num}/>
+            <AddTask onAdd={addTodayTask} num={num} page="eachDay"/>
         </div>
     )
 }

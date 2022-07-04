@@ -9,6 +9,7 @@ import priority5Reducer from '../features/priority/priority5Slice'
 import labelForAddTaskReducer from "../features/label/labelForAddTaskSlice";
 import setPriorityForAddTaskReducer from "../features/priority/setPriorityForAddTaskSlice"
 import dropdownSetForPriorityReducer from "../features/dropdown/dropdownSetForPrioritySlice"
+import todayTaskReducer from "../features/today/todayTaskSlice"
 export default configureStore({
     reducer:{
         favorite:favoriteReducer,
@@ -20,6 +21,7 @@ export default configureStore({
         priority5:priority5Reducer,
         labelForAddTask:labelForAddTaskReducer,
         setPriorityForAddTask:setPriorityForAddTaskReducer,
-        dropdownSetForPriority:dropdownSetForPriorityReducer
+        dropdownSetForPriority:dropdownSetForPriorityReducer,
+        todayTask:todayTaskReducer
     }
 })

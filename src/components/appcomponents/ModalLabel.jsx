@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from "react";
 import ReactDOM from "react-dom/client";
+import {useNavigate} from "react-router-dom";
 
 const MODAL_STYLES = {
     position:'fixed',
@@ -27,7 +28,7 @@ export default function ModalLabel({open,children,onClose,onAdd}){
         name:""
 
     })
-
+    const navigate = useNavigate();
     const [username,setUsername] = useState("");
     useEffect(() => {
         const items = JSON.parse(localStorage.getItem('items'));
@@ -53,6 +54,22 @@ export default function ModalLabel({open,children,onClose,onAdd}){
 
     }
 
+    function handleSubmit(e){
+        e.preventDefault();
+        onAdd();
+        let submitLabel = "username="+username+"&name="+label.name
+        fetch('/api/addLabel',{
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body: submitLabel
+        }).then((res)=>{
+            console.log(res);
+            // navigate('/app/inbox',{replace:false});
+            navigate(2);
+        })
+
+    }
+
     if(!open) return null;
     return (
         <>
@@ -66,9 +83,8 @@ export default function ModalLabel({open,children,onClose,onAdd}){
                 </div>
 
                 <button onClick={onClose} style={{display:"inline-block"}}>Cancel</button>
-                <form style={{display:"inline-block"}} action="/api/addlabel" method="post" >
-                    <input type="hidden" name="username" value={username}/>
-                    <input type="hidden" name="name" value={label.name}/>
+                <form style={{display:"inline-block"}} onSubmit={handleSubmit} >
+
                     <button type="submit">Add</button>
                 </form>
             </div>

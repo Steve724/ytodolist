@@ -15,6 +15,7 @@ export default function Priority1({children,username}){
     function addPriority1Task(task){
         dispatch(addP1(task));
     }
+
     const [count,setCount] = useState();
     useEffect(()=>{
         fetch("/api/userinfo")

@@ -4,12 +4,15 @@ import {useSelector,useDispatch} from "react-redux";
 import {add,selectFavorite} from '../../features/favorite/favoriteSlice';
 import FavoriteItem from "./FavoriteItem";
 import {addP1, initP1} from "../../features/priority/priority1Slice";
+import {useNavigate} from "react-router-dom";
+
 export default function ListFL({username}){
     const favorite = useSelector(selectFavorite);
     const dispatch = useDispatch();
     const [isExpand,setIsExpand] = useState(true);
     const [isOpen,setIsOpen] = useState(false);
     const [filters,setFilters] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         fetch("/api/userinfo")
@@ -31,16 +34,23 @@ export default function ListFL({username}){
             setIsExpand(false);
         }
     }
-    function addFilters(filter){
-        setFilters(prevState => {
-            return [
-                ...prevState,
-                filter
-            ]
-        })
+    function addFilters(){
         setIsExpand(true);
         setIsOpen(false);
 
+    }
+
+    function handleDelete(id){
+        console.log(1);
+        console.log(id);
+        fetch('/api/deleteFilter',{
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body:"username="+username+"&id="+id
+        }).then((res)=>{
+            console.log('delete succeed');
+            navigate(2);
+        })
     }
     return (
         <div>
@@ -57,11 +67,8 @@ export default function ListFL({username}){
                     return (
                         <div>
                             <FavoriteItem item={item}/>
-                            <form style={{display:"inline-block"}} action="/api/deletefilter" method="post">
-                                <button type="submit" style={{borderWidth:'0px',backgroundColor:'white',display:"inline-block"}}><i className="fa-regular fa-square"></i></button>
-                                <input name="name" value={item.name} type="hidden"/>
-                                <input name="username" value={username} type="hidden"/>
-                            </form>
+                            <p><button type="button" onClick={()=>{handleDelete(item._id.toString())}} style={{borderWidth:'0px',backgroundColor:'white'}}><i className="fa-regular fa-square"></i></button>
+                                </p>
                             <hr/>
                         </div>)
                 })

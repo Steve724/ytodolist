@@ -5,6 +5,7 @@ import {useSelector,useDispatch} from "react-redux";
 // import {addLabel,selectLabel} from "../../features/label/labelSlice";
 import {addLabelForAddTask,selectLabelForAddTask} from "../../features/label/labelForAddTaskSlice";
 import FavoriteItem from "./FavoriteItem";
+import {useNavigate} from "react-router-dom";
 
 export default function ListLabels({username}){
     const labelForAddTask = useSelector(selectLabelForAddTask);
@@ -12,7 +13,7 @@ export default function ListLabels({username}){
     const [isExpand,setIsExpand] = useState(true);
     const [isOpen,setIsOpen] = useState(false);
     const [labels,setLabels] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(()=>{
         fetch("/api/userinfo")
             .then(response=>response.json())
@@ -44,6 +45,20 @@ export default function ListLabels({username}){
         setIsOpen(false);
         dispatch(addLabelForAddTask(label));
     }
+
+    function handleDelete(id){
+        console.log(1);
+        console.log(id);
+        fetch('/api/deleteLabel',{
+            method:"POST",
+            headers:{"Content-Type":"application/x-www-form-urlencoded"},
+            body:"username="+username+"&id="+id
+        }).then((res)=>{
+            console.log('delete succeed');
+            navigate(2);
+        })
+    }
+
     return (
         <div>
             <span><a type="button" onClick={expandOrNot}>{isExpand?
@@ -58,11 +73,8 @@ export default function ListLabels({username}){
                 labels.map((item)=>{
                     return (<div>
                         <FavoriteItem item={item}/>
-                        <form style={{display:"inline-block"}} action="/api/deletelabel" method="post">
-                            <button type="submit" style={{borderWidth:'0px',backgroundColor:'white',display:"inline-block"}}><i className="fa-regular fa-square"></i></button>
-                            <input name="name" value={item.name} type="hidden"/>
-                            <input name="username" value={username} type="hidden"/>
-                        </form>
+                        <p><button type="button" onClick={()=>{handleDelete(item._id.toString())}} style={{borderWidth:'0px',backgroundColor:'white'}}><i className="fa-regular fa-square"></i></button>
+                        </p>
                         <hr/></div>)
                 })
             }
