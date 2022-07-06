@@ -5,27 +5,31 @@ import {add,selectFavorite} from '../../features/favorite/favoriteSlice';
 import FavoriteItem from "./FavoriteItem";
 import {addP1, initP1} from "../../features/priority/priority1Slice";
 import {useNavigate} from "react-router-dom";
+import {selectFilter,addFilter,initFilter} from "../../features/filter/filterSlice";
 
 export default function ListFL({username}){
     const favorite = useSelector(selectFavorite);
     const dispatch = useDispatch();
+    const filter = useSelector(selectFilter);
     const [isExpand,setIsExpand] = useState(true);
     const [isOpen,setIsOpen] = useState(false);
-    const [filters,setFilters] = useState([]);
+    // const [filters,setFilters] = useState([]);
     const navigate = useNavigate();
 
     useEffect(()=>{
         fetch("/api/userinfo")
             .then(response=>response.json())
             .then(data=> {
+                dispatch(initFilter());
                 data.map(user=>{
                     if (user.username===username){
-                        setFilters(user.filters);
+                        user.filters.map((item)=>dispatch(addFilter(item)));
+                        // setFilters(user.filters);
                         return user.tasks;
                     }
                 })
             })
-    },[username]);
+    },[filter]);
 
     function expandOrNot(){
         if(isExpand===false){
@@ -63,7 +67,7 @@ export default function ListFL({username}){
             </span>
             <hr/>
             {   isExpand &&
-                filters.map((item)=>{
+                filter.map((item)=>{
                     return (
                         <div>
                             <FavoriteItem item={item}/>

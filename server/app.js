@@ -44,6 +44,11 @@ const labelSchema = new mongoose.Schema({
     name:String
 })
 
+const projectSchema = new mongoose.Schema({
+    name:String,
+    tasks:[taskSchema]
+})
+
 const userSchema = new mongoose.Schema({
     username:String,
     password:String,
@@ -70,20 +75,41 @@ passport.deserializeUser(User.deserializeUser());
 //     res.sendFile(path.join(__dirname, '../public/index.html'));
 // })
 
+// app.get('/app/today',function (req,res){
+//     res.sendFile(path.join(__dirname,'/public','index.html'));
+// })
+
 app.get('/app/today',function (req,res){
-    res.sendFile(path.join(__dirname,'/public','index.html'));
+    if(req.isAuthenticated()){
+        res.sendFile(path.join(__dirname,'/public','index.html'));
+    }else{
+        res.redirect("/login");
+    }
+    // res.sendFile(path.join(__dirname,'/public','index.html'));
 })
 
 app.get('/app/inbox',function (req,res){
-    res.sendFile(path.join(__dirname,'/public','index.html'));
+    if(req.isAuthenticated()){
+        res.sendFile(path.join(__dirname,'/public','index.html'));
+    }else{
+        res.redirect("/login");
+    }
 })
 
 app.get('/app/filters-labels',function (req,res){
-    res.sendFile(path.join(__dirname,'/public','index.html'));
+    if(req.isAuthenticated()){
+        res.sendFile(path.join(__dirname,'/public','index.html'));
+    }else{
+        res.redirect("/login");
+    }
 })
 
 app.get('/app/upcoming',function (req,res){
-    res.sendFile(path.join(__dirname,'/public','index.html'));
+    if(req.isAuthenticated()){
+        res.sendFile(path.join(__dirname,'/public','index.html'));
+    }else{
+        res.redirect("/login");
+    }
 })
 
 app.get('/login',function (req,res){
@@ -91,6 +117,10 @@ app.get('/login',function (req,res){
 })
 
 app.get('/signup',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
+app.get('/app/project/:projectName',function (req,res){
     res.sendFile(path.join(__dirname,'/public','index.html'));
 })
 

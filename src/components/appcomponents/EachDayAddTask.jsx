@@ -55,7 +55,7 @@ export default function EachDayAddTask({num}){
             body:"username="+username+"&id="+id
         }).then((res)=>{
             console.log('delete succeed');
-            navigate(2);
+            navigate(0);
         })
     }
 

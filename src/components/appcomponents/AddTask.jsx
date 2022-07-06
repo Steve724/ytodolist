@@ -112,7 +112,12 @@ function AddTask(props){
             console.log(res);
             setExpanded(false);
             // navigate('/app/inbox',{replace:false});
-            navigate(2);
+            if(props.page==="eachDay"){
+                navigate(0);
+            }else{
+                navigate(2);
+            }
+
         })
 
     }
