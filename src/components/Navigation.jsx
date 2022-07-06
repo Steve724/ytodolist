@@ -40,7 +40,7 @@ export default class Navigation extends React.Component{
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
                         <Link href="#" className="nav-link" to="/login">Log in</Link>
-                        <button className="btn btn-danger my-2 my-sm-0" type="submit">Start for free</button>
+                        <button className="btn btn-danger my-2 my-sm-0" type="submit" style={{color:"white"}}><Link to="/signup">Start for free</Link></button>
                     </form>
                 </div>
             </nav>

@@ -1,6 +1,7 @@
 import React from "react";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
+import {Link} from "react-router-dom";
 export default class Home extends React.Component{
     render() {
         return(
@@ -11,9 +12,9 @@ export default class Home extends React.Component{
                         work and life, finally.
                     </h1>
                     <p>
-                        Become focused, organized, and calm with Todoist. The world’s #1 task manager and to-do list app.
+                        Become focused, organized, and calm with YTodolist. The world’s #1 task manager and to-do list app.
                     </p>
-                    <button className="btn btn-danger my-2 my-sm-0" type="submit">Start for free</button>
+                    <button className="btn btn-danger my-2 my-sm-0" type="submit" style={{color:"white"}}><Link to="/signup">Start for free</Link></button>
                 </div>
                 <div className="container img-paragraph">
                     <div className="row">
@@ -40,7 +41,7 @@ export default class Home extends React.Component{
                 <div className="home-foot">
                     <div className="foot-paragraph">
                         <h1>Achieve peace of mind with Todoist</h1>
-                        <button className="btn btn-danger my-2 my-sm-0" type="submit">Start for free</button>
+                        <button className="btn btn-danger my-2 my-sm-0" type="submit" style={{color:"white"}}><Link to="/signup">Start for free</Link></button>
                     </div>
                     <img className="foot-img" src="https://todoist.com/_next/static/images/peace@2x_158f4453627629ae1dd3ec115a559630.webp" alt="foot-img"/>
                 </div>
