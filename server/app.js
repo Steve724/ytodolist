@@ -120,6 +120,10 @@ app.get('/signup',function (req,res){
     res.sendFile(path.join(__dirname,'/public','index.html'));
 })
 
+app.get('/forMe',function (req,res){
+    res.sendFile(path.join(__dirname,'/public','index.html'));
+})
+
 app.get('/app/project/:projectName',function (req,res){
     res.sendFile(path.join(__dirname,'/public','index.html'));
 })
@@ -132,9 +136,12 @@ app.get("/api/app",function (req,res){
     }
 })
 
-app.get("/api/logout",function (req,res){
-    req.logout();
-    res.redirect("/");
+app.post("/api/logout",function (req,res){
+    console.log('Log out successfully');
+    req.logout(()=>{
+        res.redirect("/");
+    });
+
 })
 
 app.get("/api/userinfo",function (req,res){
