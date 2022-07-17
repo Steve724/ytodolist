@@ -11,6 +11,7 @@ export default function DropdownMenuForPriority(){
         borderRadius:"15px",
         padding: "1rem",
         overFlow: "hidden",
+
     }
     return (
         <div id="dropdown" style={dropDown}>

@@ -19,7 +19,7 @@ export default class Navigation extends React.Component{
                             <Link className="nav-link" to="/templates">Templates</Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">For Teams</a>
+                            <Link className="nav-link" to="/forMe">For Me</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

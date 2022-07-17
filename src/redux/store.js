@@ -11,6 +11,7 @@ import setPriorityForAddTaskReducer from "../features/priority/setPriorityForAdd
 import dropdownSetForPriorityReducer from "../features/dropdown/dropdownSetForPrioritySlice"
 import todayTaskReducer from "../features/today/todayTaskSlice"
 import filterReducer from "../features/filter/filterSlice"
+import overdueTaskReducer from "../features/overdue/overdueTaskSlice"
 export default configureStore({
     reducer:{
         favorite:favoriteReducer,
@@ -24,6 +25,7 @@ export default configureStore({
         setPriorityForAddTask:setPriorityForAddTaskReducer,
         dropdownSetForPriority:dropdownSetForPriorityReducer,
         todayTask:todayTaskReducer,
-        filter:filterReducer
+        filter:filterReducer,
+        overdueTask:overdueTaskReducer
     }
 })

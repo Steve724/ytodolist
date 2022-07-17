@@ -1,0 +1,39 @@
+.skills__list {
+    max-width: 450px;
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.btn--plain {
+    text-transform: none;
+    background-color: #fff;
+    box-shadow: 0 3px 3px 0 rgb(0 0 0 / 15%);
+    border: 0;
+}
+
+.btn {
+    display: block;
+    cursor: pointer;
+    padding: 0.8em 1.4em;
+    font-weight: 500;
+    font-size: .9rem;
+    text-transform: lowercase;
+    transition: -webkit-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out;
+    transition: transform .2s ease-in-out,-webkit-transform .2s ease-in-out;
+}
+
+.skills__list-item {
+    margin: 0.5em;
+}
+
+.item:hover{
+    transform: translateY(-7px);
+}

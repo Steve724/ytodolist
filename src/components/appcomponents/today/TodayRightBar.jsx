@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from "react";
-import getDate,{getDay} from "../../../utils/getDate";
+import getDate, {getDay, getWholeDate} from "../../../utils/getDate";
 import Task from "../Task";
 import compareDate from "../../../utils/compareDate";
 import AddTask from "../AddTask";
 import {useSelector,useDispatch} from "react-redux";
 import {addTodayTask,initTodayTask,selectTodayTask} from "../../../features/today/todayTaskSlice";
 import {useNavigate} from "react-router-dom";
+import {compareTime} from "../../../utils/getDate";
+import {addOverdueTask,initOverdueTask,selectOverdueTask} from "../../../features/overdue/overdueTaskSlice";
 
 function TodayRightBar(){
     const [items, setItems] = useState([]);
     const [username,setUsername] = useState("");
     const todayTask = useSelector(selectTodayTask);
+    const overdueTask = useSelector(selectOverdueTask);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -22,18 +25,8 @@ function TodayRightBar(){
 
     },[]);
 
-    const date = getDate();
-    const task1 = {
-        title:"Add all my personal tasks",
-        time:"9 May"
-    }
-    const task2 = {
-        title:"Play games",
-        time:"8 Jun"
-    }
+    const date = getWholeDate(0);
 
-    const [tasks,setTasks] = useState([task1,task2]);
-    const [overdueTask,setOverdueTask] = useState([]);
 
     const over = [];
     const [task,setTask] = useState({
@@ -41,6 +34,27 @@ function TodayRightBar(){
         content:"",
         time:""
     })
+
+    useEffect(()=>{
+        fetch("/api/userinfo")
+            .then(response=>response.json())
+            .then(data=>{
+                dispatch(initOverdueTask());
+                data.map(user=>{
+                    if(user.username===username){
+                        user.tasks.forEach(task=>{
+                            if(compareTime(task.time,date)){
+                                dispatch(addOverdueTask(task));
+                            }
+                        })
+                        return user.tasks;
+                    }
+                })
+            })
+        // if(compareTime(task3.time,date)){
+        //     tasks.push(task3);
+        // }
+    },[overdueTask])
 
     useEffect(()=>{
         fetch("/api/userinfo")
@@ -69,7 +83,6 @@ function TodayRightBar(){
     // }
 
     function handleDelete(id){
-        console.log(1);
         console.log(id);
         fetch('/api/deleteTask',{
             method:"POST",
@@ -92,10 +105,10 @@ function TodayRightBar(){
             <h5>Today <span>{date}</span></h5>
             <h6>Overdue</h6>
             {
-                tasks.map((item,index)=>{
+                overdueTask.map((item,index)=>{
                     return (
                         <div key={index}>
-                            <Task title={item.title} time={item.time} id={index} key={index} delete={handleDelete}/>
+                            <Task title={item.title} time={item.time} id={item._id.toString()} key={index} delete={handleDelete}/>
                         </div>
                     )
                 })

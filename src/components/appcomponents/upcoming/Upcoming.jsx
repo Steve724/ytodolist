@@ -11,11 +11,11 @@ export default function Upcoming(){
     }
     return(
         <div>
-            <div className="appNavigation">
+            <div className="appNavigation" >
                 <AppNavigation isShowLeft={isShowLeft}/>
             </div>
             {/*<AppNavigation isShowLeft={isShowLeft}/>*/}
-            <div className="container-fluid" >
+            <div className="container-fluid">
                 <div className="row">
                     <div className="col-lg-4 left-bar">
                         {
@@ -23,7 +23,7 @@ export default function Upcoming(){
                         }
                         {/*<LeftBar/>*/}
                     </div>
-                    <div className="col-lg-8" style={{marginTop:"80px"}}>
+                    <div className="col-lg-8" >
                         <UpcomingRightBar/>
                     </div>
                 </div>

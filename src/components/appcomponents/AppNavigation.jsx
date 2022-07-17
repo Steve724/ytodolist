@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
-
+import NavItem from "./navbar/NavItem";
+import DropdownMenuForPriority from "./dropDownMenu/DropdownMenuForPriority";
+import DropdownMenuForUser from "./dropDownMenu/DropdownMenuForUser";
 function AppNavigation(props){
     const [isOpen,setIsOpen] = useState(true);
     function handleClick(){
@@ -32,7 +34,10 @@ function AppNavigation(props){
                             <a className="nav-link" href="#"><i className="fa-solid fa-bell" style={{color:"red"}}></i></a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="fa-solid fa-user" style={{color:"red"}}></i></a>
+                            <NavItem icon={<i className="fa-solid fa-user" style={{color:"red"}}></i>}>
+                                <DropdownMenuForUser/>
+                            </NavItem>
+                            {/*<a className="nav-link" href="#"><i className="fa-solid fa-user" style={{color:"red"}}></i></a>*/}
                         </li>
 
                     </ul>

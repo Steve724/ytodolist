@@ -10,6 +10,7 @@ import Project from "./appcomponents/Project";
 import Upcoming from "./appcomponents/upcoming/Upcoming";
 import FiltersLabels from "./appcomponents/filtersLabels/FiltersLabels";
 import Inbox from "./appcomponents/inbox/Inbox";
+import ForMe from "./ForMe";
 export default class Routers extends React.Component{
     render() {
         return(
@@ -24,6 +25,7 @@ export default class Routers extends React.Component{
                 <Route path="/app/filters-labels" element={<FiltersLabels/>}/>
                 <Route path="/app/upcoming" element={<Upcoming/>}/>
                 <Route path="/app/inbox" element={<Inbox/>}/>
+                <Route path="/forMe" element={<ForMe/>}/>
             </Routes>
         )
     }

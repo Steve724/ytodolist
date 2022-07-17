@@ -1,22 +1,22 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-export const todayTaskSlice = createSlice({
-    name:'todayTask',
+export const overdueTaskSlice = createSlice({
+    name:'overdueTask',
     initialState:{
         value:[],
     },
     reducers:{
-        addTodayTask:(state,action) => {
+        addOverdueTask:(state,action) => {
           state.value.push(action.payload)
         },
-        initTodayTask:(state)=>{
+        initOverdueTask:(state)=>{
             state.value=[];
         }
     },
 })
 
-export const {addTodayTask,initTodayTask} = todayTaskSlice.actions
+export const {addOverdueTask,initOverdueTask} = overdueTaskSlice.actions
 
-export const selectTodayTask = (state) => state.todayTask.value
+export const selectOverdueTask = (state) => state.overdueTask.value
 
-export default todayTaskSlice.reducer
+export default overdueTaskSlice.reducer

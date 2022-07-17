@@ -104,6 +104,11 @@ function AddTask(props){
     function handleSubmit(e){
         e.preventDefault();
         let submitTask = "username="+username+"&title="+task.title+"&content="+task.content+"&priority="+priorityValue+"&time="+timeValue+"&page="+props.page;
+        setTask({
+            title:"",
+            content:"",
+            time:""
+        });
         fetch(url,{
             method:"POST",
             headers:{"Content-Type":"application/x-www-form-urlencoded"},
@@ -143,9 +148,9 @@ function AddTask(props){
                                 placeholder="Take a note..."
                                 style={{borderWidth:'0px'}}
                             /><br/>
-                            <a type="button" className="btn btn-light" onClick={expand}>Cancel</a>
+                            <a type="button" className="btn btn-light" onClick={expand} style={{display:"inline-block"}}>Cancel</a>
                             {/*onClick={submitTask}*/}
-                            <button type="submit" className="btn btn-danger" >Add task</button>
+                            <button type="submit" className="btn btn-danger" style={{display:"inline-block"}}>Add task</button>
                             <input type="hidden" name="priority" value={priorityValue}/>
                             <input type="hidden" name="time" value={timeValue}/>
                             <Navbar>

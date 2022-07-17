@@ -29,7 +29,7 @@ function LeftBar(){
     return(
         <div style={{position:"sticky",top:"80px",marginLeft:"30px"}}>
             <table>
-                <tr>
+                <tr >
                     <td><i className="fa-solid fa-inbox" style={{color:"blue"}}></i></td>
                     <td><Link to="/app/inbox" style={{color:"black"}}>Inbox</Link></td>
                 </tr>

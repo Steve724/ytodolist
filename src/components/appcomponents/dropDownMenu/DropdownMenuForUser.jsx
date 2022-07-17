@@ -1,7 +1,8 @@
 import React from "react";
 import DropdownItem from "./DropdownItem";
 
-export default function DropdownMenuForPriority(){
+
+export default function DropdownMenuForUser(){
     const dropDown = {
         position: "absolute",
         backgroundColor: "white",
@@ -14,12 +15,10 @@ export default function DropdownMenuForPriority(){
 
     }
     return (
-        <div id="dropdown" style={dropDown}>
-            <DropdownItem pr={1}>Priority 1</DropdownItem>
-            <DropdownItem pr={2}>Priority 2</DropdownItem>
-            <DropdownItem pr={3}>Priority 3</DropdownItem>
-            <DropdownItem pr={4}>Priority 4</DropdownItem>
-            <DropdownItem pr={5}>Priority 5</DropdownItem>
+        <div style={dropDown}>
+            <form action='/api/logout' method='POST'>
+                <button type='submit' style={{backgroundColor:'white',borderWidth:'0px'}}>Logout</button>
+            </form>
         </div>
     )
 }
