@@ -45,8 +45,7 @@ const labelSchema = new mongoose.Schema({
 })
 
 const projectSchema = new mongoose.Schema({
-    name:String,
-    tasks:[taskSchema]
+    name:String
 })
 
 const userSchema = new mongoose.Schema({
@@ -54,7 +53,8 @@ const userSchema = new mongoose.Schema({
     password:String,
     tasks:[taskSchema],
     filters:[filterSchema],
-    labels:[labelSchema]
+    labels:[labelSchema],
+    projects:[projectSchema]
 })
 
 

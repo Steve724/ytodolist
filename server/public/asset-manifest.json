@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.413a4334.css",
-    "main.js": "/static/js/main.b2f77bf7.js",
+    "main.js": "/static/js/main.cadc0dfd.js",
     "static/media/resume_Gehao.pdf": "/static/media/resume_Gehao.173d1e7bd0fa0fe79fa3.pdf",
     "index.html": "/index.html",
     "main.413a4334.css.map": "/static/css/main.413a4334.css.map",
-    "main.b2f77bf7.js.map": "/static/js/main.b2f77bf7.js.map"
+    "main.cadc0dfd.js.map": "/static/js/main.cadc0dfd.js.map"
   },
   "entrypoints": [
     "static/css/main.413a4334.css",
-    "static/js/main.b2f77bf7.js"
+    "static/js/main.cadc0dfd.js"
   ]
 }
